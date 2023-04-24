@@ -18,7 +18,13 @@ class WelcomeTest {
 
 	@Test
 	void respond_Bob() {
-		assertEquals("Hello Bob", str.conversation("Bob"));
+		assertEquals("Hello, Bob", str.conversation("Bob"));
 	}
-
+	
+	@Test
+	void respond_vide_blanc_espace() {
+		assertEquals("Hello, my friend", str.conversation(""));
+		assertEquals("Hello, my friend", str.conversation("    "));
+		assertEquals("Hello, my friend", str.conversation(null));
+	}
 }
