@@ -27,4 +27,9 @@ class WelcomeTest {
 		assertEquals("Hello, my friend", str.conversation("    "));
 		assertEquals("Hello, my friend", str.conversation(null));
 	}
+	
+	@Test
+	void respond_majuscule() {
+		assertEquals("HELLO, JAMES !", str.conversation("JAMES"));
+	}
 }
