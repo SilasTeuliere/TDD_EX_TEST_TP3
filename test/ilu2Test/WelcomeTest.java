@@ -18,7 +18,7 @@ class WelcomeTest {
 
 	@Test
 	void respond_Bob() {
-		assertEquals("Hello, Bob", str.conversation("Bob"));
+		assertEquals("Hello, Bob", str.conversation("bob"));
 	}
 	
 	@Test
@@ -31,5 +31,11 @@ class WelcomeTest {
 	@Test
 	void respond_majuscule() {
 		assertEquals("HELLO, JAMES !", str.conversation("JAMES"));
+	}
+	
+	@Test
+	void respond_deux_noms() {
+		assertEquals("Hello, Bob, Amy", str.conversation("bob,amy"));
+		assertEquals("Hello, James, Patrick", str.conversation("James,patrick"));
 	}
 }

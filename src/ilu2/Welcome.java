@@ -5,15 +5,37 @@ public class Welcome {
 	
 	public String conversation(String nom) {
 		if(nom == null || nom.trim().equals("")) {
-			conv = "Hello, my friend";
+			nom = "my friend";
+		} else {
+			nom = nom.substring(0, 1).toUpperCase() + nom.substring(1);
 		}
-		else if(nom.equals(nom.toUpperCase())) {
+		final String[] tabNoms = nom.split(",");
+		if(tabNoms.length == 2) {
+			nom = concatDeuxNoms(tabNoms);
+		}
+		if(nom.equals(nom.toUpperCase())) {
 			conv = "HELLO, " + nom + " !";
 		}
 		else {
 			conv = "Hello, " + nom;
 		}
 		return conv;
+	}
+
+	/**
+	 * Cette methode concatene 2 noms
+	 * @param tabNoms
+	 * @return
+	 */
+	private String concatDeuxNoms(final String[] tabNoms) {
+		StringBuilder deuxNoms = new StringBuilder();
+		for (int i = 0; i < tabNoms.length; i++) {
+			deuxNoms.append(tabNoms[i].substring(0, 1).toUpperCase() + tabNoms[i].substring(1)) ;
+			if(i < tabNoms.length - 1) {
+				deuxNoms.append(", ");
+			}
+		}
+		return deuxNoms.toString();
 	}
 }
 
