@@ -10,8 +10,8 @@ public class Welcome {
 			nom = nom.substring(0, 1).toUpperCase() + nom.substring(1);
 		}
 		final String[] tabNoms = nom.split(",");
-		if(tabNoms.length == 2) {
-			nom = concatDeuxNoms(tabNoms);
+		if(tabNoms.length >= 2) {
+			nom = concatPlusieurNoms(tabNoms);
 		}
 		if(nom.equals(nom.toUpperCase())) {
 			conv = "HELLO, " + nom + " !";
@@ -23,19 +23,19 @@ public class Welcome {
 	}
 
 	/**
-	 * Cette methode concatene 2 noms
+	 * Cette methode concatene plusieurs noms
 	 * @param tabNoms
 	 * @return
 	 */
-	private String concatDeuxNoms(final String[] tabNoms) {
-		StringBuilder deuxNoms = new StringBuilder();
+	private String concatPlusieurNoms(final String[] tabNoms) {
+		StringBuilder plusieurNoms = new StringBuilder();
 		for (int i = 0; i < tabNoms.length; i++) {
-			deuxNoms.append(tabNoms[i].substring(0, 1).toUpperCase() + tabNoms[i].substring(1)) ;
+			plusieurNoms.append(tabNoms[i].substring(0, 1).toUpperCase() + tabNoms[i].substring(1)) ;
 			if(i < tabNoms.length - 1) {
-				deuxNoms.append(", ");
+				plusieurNoms.append(", ");
 			}
 		}
-		return deuxNoms.toString();
+		return plusieurNoms.toString();
 	}
 }
 

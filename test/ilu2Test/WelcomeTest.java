@@ -38,4 +38,10 @@ class WelcomeTest {
 		assertEquals("Hello, Bob, Amy", str.conversation("bob,amy"));
 		assertEquals("Hello, James, Patrick", str.conversation("James,patrick"));
 	}
+	
+	@Test
+	void respond_plusieur_noms() {
+		assertEquals("Hello, Bob, Amy, Richard", str.conversation("bob,amy,richard"));
+		assertEquals("Hello, James, Patrick, Jerry", str.conversation("James,patrick,Jerry"));
+	}
 }
