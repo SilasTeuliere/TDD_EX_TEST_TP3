@@ -3,15 +3,15 @@ package ilu2;
 import java.util.ArrayList;
 
 public class Welcome {
-	private String conv;
+	private static String conv;
 	
-	public String conversation(String nom) {
-		if(nom == null || nom.trim().equals("")) {
+	public static String welcome(String input) {
+		if(input == null || input.trim().equals("")) {
 			conv = "Hello, my friend";
 		}else {
-			final String[] tabNoms = nom.split(",");
+			final String[] tabNoms = input.split(",");
 			if (tabNoms.length == 1) {
-				conv = minOrMajHello(nom);
+				conv = minOrMajHello(input);
 			}else {
 				conv = concatPlusieurNoms(tabNoms);
 			}
@@ -24,7 +24,7 @@ public class Welcome {
 	 * @param nom
 	 * @return
 	 */
-	private String minOrMajHello(String nom) {
+	private static String minOrMajHello(String nom) {
 		nom = nom.substring(0, 1).toUpperCase() + nom.substring(1);
 		if(nom.equals(nom.toUpperCase())) {
 			conv = "HELLO, " + nom + " !";
@@ -39,7 +39,7 @@ public class Welcome {
 	 * @param tabNoms
 	 * @return
 	 */
-	private String concatPlusieurNoms(final String[] tabNoms) {
+	private static String concatPlusieurNoms(final String[] tabNoms) {
 		StringBuilder helloMin = new StringBuilder("Hello, ");
 		StringBuilder helloMaj = new StringBuilder("HELLO, ");
 		String strReturn = "";
@@ -58,7 +58,7 @@ public class Welcome {
 	 * @param tabMaj
 	 * @return
 	 */
-	private String testToStrReturn(StringBuilder helloMin, StringBuilder helloMaj, ArrayList<String> tabMin,
+	private static String testToStrReturn(StringBuilder helloMin, StringBuilder helloMaj, ArrayList<String> tabMin,
 			ArrayList<String> tabMaj) {
 		String strReturn;
 		if(tabMaj.size() > 0 && tabMin.size() > 0) {
@@ -81,11 +81,14 @@ public class Welcome {
 	 * @param plusieurNoms
 	 * @param tabMin
 	 */
-	private void prepHelloMin(StringBuilder helloMin, ArrayList<String> tabMin) {
+	private static void prepHelloMin(StringBuilder helloMin, ArrayList<String> tabMin) {
 		if(tabMin.size() > 0) {
 			for (int i = 0; i < tabMin.size(); i++) {
+				if(i == tabMin.size() - 1 && tabMin.size() != 1) {
+					helloMin.append(" and ");
+				}
 				helloMin.append(tabMin.get(i).substring(0, 1).toUpperCase() + tabMin.get(i).substring(1)) ;
-				if(i < tabMin.size() - 1) {
+				if(i < tabMin.size() - 2) {
 					helloMin.append(", ");
 				}
 			}
@@ -96,11 +99,14 @@ public class Welcome {
 	 * @param helloMaj
 	 * @param tabMaj
 	 */
-	private void prepHelloMaj(StringBuilder helloMaj, ArrayList<String> tabMaj) {
+	private static void prepHelloMaj(StringBuilder helloMaj, ArrayList<String> tabMaj) {
 		if(tabMaj.size() > 0) {
 			for (int i = 0; i < tabMaj.size(); i++) {
+				if(i == tabMaj.size() - 1 && tabMaj.size() != 1) {
+					helloMaj.append(" AND ");
+				}
 				helloMaj.append(tabMaj.get(i));
-				if(i < tabMaj.size() - 1) {
+				if(i < tabMaj.size() - 2) {
 					helloMaj.append(", ");
 				}
 			}
@@ -112,7 +118,7 @@ public class Welcome {
 	 * @param tab
 	 * @return
 	 */
-	private ArrayList<String> extractTabToMajTab(String[] tab) {
+	private static ArrayList<String> extractTabToMajTab(String[] tab) {
 		ArrayList<String> tabMaj = new ArrayList<String>();
 		for(int i = 0;i < tab.length ;i++) {
 			if(tab[i].equals(tab[i].toUpperCase())){
@@ -126,7 +132,7 @@ public class Welcome {
 	 * @param tab
 	 * @return
 	 */
-	private ArrayList<String> extractTabToMinTAb(String[] tab) {
+	private static ArrayList<String> extractTabToMinTAb(String[] tab) {
 		ArrayList<String> tabMin = new ArrayList<String>();
 		for(int i = 0;i < tab.length ;i++) {
 			if(!tab[i].equals(tab[i].toUpperCase())){

@@ -9,71 +9,68 @@ import ilu2.Welcome;
 
 class WelcomeTest {
 	
-	private Welcome str;
-	
 	@BeforeEach
 	void setUp() throws Exception {
-		str = new Welcome();
 	}
 
 	@Test
 	void respond_Bob() {
-		assertEquals("Hello, Bob", str.conversation("bob"));
+		assertEquals("Hello, Bob", Welcome.welcome("bob"));
 	}
 	
 	@Test
 	void respond_vide_blanc_espace() {
-		assertEquals("Hello, my friend", str.conversation(""));
-		assertEquals("Hello, my friend", str.conversation("    "));
-		assertEquals("Hello, my friend", str.conversation(null));
+		assertEquals("Hello, my friend", Welcome.welcome(""));
+		assertEquals("Hello, my friend", Welcome.welcome("    "));
+		assertEquals("Hello, my friend", Welcome.welcome(null));
 	}
 	
 	@Test
 	void respond_majuscule() {
-		assertEquals("HELLO, JAMES !", str.conversation("JAMES"));
+		assertEquals("HELLO, JAMES !", Welcome.welcome("JAMES"));
 	}
 	
 	@Test
 	void respond_deux_noms() {
-		assertEquals("Hello, Bob, Amy", str.conversation("bob,amy"));
-		assertEquals("Hello, James, Patrick", str.conversation("James,patrick"));
+		assertEquals("Hello, Bob and Amy", Welcome.welcome("bob,amy"));
+		assertEquals("Hello, James and Patrick", Welcome.welcome("James,patrick"));
 	}
 	
 	@Test
 	void respond_plusieur_noms() {
-		assertEquals("Hello, Bob, Amy, Richard", str.conversation("bob,amy,richard"));
-		assertEquals("Hello, James, Patrick, Jerry", str.conversation("James,patrick,Jerry"));
+		assertEquals("Hello, Bob, Amy and Richard", Welcome.welcome("bob,amy,richard"));
+		assertEquals("Hello, James, Patrick and Jerry", Welcome.welcome("James,patrick,Jerry"));
 	}
 	
 	@Test
 	void respond_plusieur_noms_maj() {
-		assertEquals("Hello, Amy, Jerry. AND HELLO, BOB !", str.conversation("Amy,BOB,Jerry"));
-		assertEquals("HELLO, AMY, BOB, JERRY !", str.conversation("AMY,BOB,JERRY"));
-		assertEquals("Hello, Amy, Bob, Jerry", str.conversation("Amy,bob,jerry"));
-		assertEquals("Hello, Amy, Jerry. AND HELLO, BOB, TOTO !", str.conversation("Amy,BOB,jerry,TOTO"));
+		assertEquals("Hello, Amy and Jerry. AND HELLO, BOB !", Welcome.welcome("Amy,BOB,Jerry"));
+		assertEquals("HELLO, AMY, BOB AND JERRY !", Welcome.welcome("AMY,BOB,JERRY"));
+		assertEquals("Hello, Amy, Bob and Jerry", Welcome.welcome("Amy,bob,jerry"));
+		assertEquals("Hello, Amy and Jerry. AND HELLO, BOB AND TOTO !", Welcome.welcome("Amy,BOB,jerry,TOTO"));
+	}
+	
+	@Test
+	void respond_plusieur_noms_and() {
+		assertEquals("Hello, Bob, Amy and Jerry", Welcome.welcome("bob,amy,Jerry"));
+		assertEquals("HELLO, AMY, BOB AND JERRY !", Welcome.welcome("AMY,BOB,JERRY"));
+		assertEquals("Hello, Bob and Jean. AND HELLO, AMY AND JERRY !", Welcome.welcome("AMY,bob,JERRY,jean"));
 	}
 	
 //	@Test
-//	void respond_plusieur_noms_and() {
-//		assertEquals("Hello, Bob, Amy and Jerry!", str.conversation("bob,amy,Jerry"));
-//		assertEquals("HELLO, AMY, BOB AND JERRY !", str.conversation("AMY,BOB,JERRY"));
-//		assertEquals("Hello, Bob and Jean. AND HELLO, AMY AND JERRY !", str.conversation("AMY,bob,JERRY,jean"));
-//	}
-	
-//	@Test
 //	void respond_plusieur_noms_vide() {
-//		assertEquals("Hello, Amy, Bob, Jerry", str.conversation("Amy    ,  bob,  jerry  "));
+//		assertEquals("Hello, Amy, Bob, Jerry", Welcome.welcome("Amy    ,  bob,  jerry  "));
 //	}
 	
 //	@Test
 //	void respond_plusieur_noms_occurence() {
-//		assertEquals("Hello, Bob(x3), and Amy. AND HELLO JERRY (x2)", str.conversation("bob,JERRY, bob,amy,bob,JERRY"));
-//		assertEquals("Hello, Bob(x2), and Amy. AND HELLO JERRY (x2) AND BOB", str.conversation("bob,JERRY, BOB,amy,bob,JERRY"));
+//		assertEquals("Hello, Bob(x3), and Amy. AND HELLO JERRY (x2)", Welcome.welcome("bob,JERRY, bob,amy,bob,JERRY"));
+//		assertEquals("Hello, Bob(x2), and Amy. AND HELLO JERRY (x2) AND BOB", Welcome.welcome("bob,JERRY, BOB,amy,bob,JERRY"));
 //	}
 	
 //	@Test
 //	void respond_plusieur_noms_YODA() {
-//		assertEquals("Bob, Yoda, and Amy, Hello. AND HELLO JERRY", str.conversation(" bob, yoda, amy, JERRY,"));
-//		assertEquals("Hello, Bob and Amy. AND YODA (X2) AND JERRY HELLO !", str.conversation("bob, YODA, amy, JERRY, YODA"));
+//		assertEquals("Bob, Yoda, and Amy, Hello. AND HELLO JERRY", Welcome.welcome(" bob, yoda, amy, JERRY,"));
+//		assertEquals("Hello, Bob and Amy. AND YODA (X2) AND JERRY HELLO !", Welcome.welcome("bob, YODA, amy, JERRY, YODA"));
 //	}
 }
