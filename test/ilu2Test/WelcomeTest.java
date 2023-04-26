@@ -57,10 +57,12 @@ class WelcomeTest {
 		assertEquals("Hello, Bob and Jean. AND HELLO, AMY AND JERRY !", Welcome.welcome("AMY,bob,JERRY,jean"));
 	}
 	
-//	@Test
-//	void respond_plusieur_noms_vide() {
-//		assertEquals("Hello, Amy, Bob, Jerry", Welcome.welcome("Amy    ,  bob,  jerry  "));
-//	}
+	@Test
+	void respond_plusieur_noms_vide() {
+		assertEquals("Hello, Amy, Bob and Jerry", Welcome.welcome("Amy    ,  bob,  jerry  "));
+		assertEquals("Hello, my friend and my friend", Welcome.welcome("  ,  "));
+		assertEquals("Hello, my friend, my friend and my friend", Welcome.welcome("  ,, "));
+	}
 	
 //	@Test
 //	void respond_plusieur_noms_occurence() {

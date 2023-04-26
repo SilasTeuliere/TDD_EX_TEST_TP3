@@ -87,7 +87,11 @@ public class Welcome {
 				if(i == tabMin.size() - 1 && tabMin.size() != 1) {
 					helloMin.append(" and ");
 				}
-				helloMin.append(tabMin.get(i).substring(0, 1).toUpperCase() + tabMin.get(i).substring(1)) ;
+				if(tabMin.get(i)!= "my friend") {
+					helloMin.append(tabMin.get(i).substring(0, 1).toUpperCase() + tabMin.get(i).substring(1)) ;
+				} else {
+					helloMin.append(tabMin.get(i));
+				}
 				if(i < tabMin.size() - 2) {
 					helloMin.append(", ");
 				}
@@ -122,8 +126,11 @@ public class Welcome {
 		ArrayList<String> tabMaj = new ArrayList<String>();
 		for(int i = 0;i < tab.length ;i++) {
 			if(tab[i].equals(tab[i].toUpperCase())){
-				tabMaj.add(tab[i]);
+				if(!tab[i].trim().equals("")) {
+					tabMaj.add(tab[i].trim());
+				}
 			}
+
 		}
 		return tabMaj;
 	}
@@ -136,8 +143,10 @@ public class Welcome {
 		ArrayList<String> tabMin = new ArrayList<String>();
 		for(int i = 0;i < tab.length ;i++) {
 			if(!tab[i].equals(tab[i].toUpperCase())){
-				tabMin.add(tab[i]);
+				tabMin.add(tab[i].trim());
 			}
+			if(tab[i].trim().equals(""))
+				tabMin.add("my friend");
 		}
 		return tabMin;
 	}
