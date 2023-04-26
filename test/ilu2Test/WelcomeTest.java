@@ -60,19 +60,20 @@ class WelcomeTest {
 	@Test
 	void respond_plusieur_noms_vide() {
 		assertEquals("Hello, Amy, Bob and Jerry", Welcome.welcome("Amy    ,  bob,  jerry  "));
-		assertEquals("Hello, my friend and my friend", Welcome.welcome("  ,  "));
-		assertEquals("Hello, my friend, my friend and my friend", Welcome.welcome("  ,, "));
+		assertEquals("Hello, my friends", Welcome.welcome("  ,  "));
+		assertEquals("Hello, my friends", Welcome.welcome("  ,, "));
+	}
+	
+	@Test
+	void respond_plusieur_noms_occurence() {
+		assertEquals("Hello, Bob (x3) and Amy. AND HELLO, JERRY (x3) !", Welcome.welcome("bob,JERRY,bob,amy,bob,JERRY,JERRY"));
+		assertEquals("Hello, Bob (x2) and Amy. AND HELLO, JERRY (x2) AND BOB !", Welcome.welcome("bob,JERRY, BOB,amy,bob,JERRY"));
+		assertEquals("Hello, Bob (x2) and Amy (x3)", Welcome.welcome("bob,amy, bob,amy,amy"));
 	}
 	
 //	@Test
-//	void respond_plusieur_noms_occurence() {
-//		assertEquals("Hello, Bob(x3), and Amy. AND HELLO JERRY (x2)", Welcome.welcome("bob,JERRY, bob,amy,bob,JERRY"));
-//		assertEquals("Hello, Bob(x2), and Amy. AND HELLO JERRY (x2) AND BOB", Welcome.welcome("bob,JERRY, BOB,amy,bob,JERRY"));
-//	}
-	
-//	@Test
 //	void respond_plusieur_noms_YODA() {
-//		assertEquals("Bob, Yoda, and Amy, Hello. AND HELLO JERRY", Welcome.welcome(" bob, yoda, amy, JERRY,"));
+//		assertEquals("Bob, Yoda, and Amy, Hello. AND HELLO, JERRY", Welcome.welcome(" bob, yoda, amy, JERRY,"));
 //		assertEquals("Hello, Bob and Amy. AND YODA (X2) AND JERRY HELLO !", Welcome.welcome("bob, YODA, amy, JERRY, YODA"));
 //	}
 }

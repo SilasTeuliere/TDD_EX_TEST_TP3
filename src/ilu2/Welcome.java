@@ -87,7 +87,7 @@ public class Welcome {
 				if(i == tabMin.size() - 1 && tabMin.size() != 1) {
 					helloMin.append(" and ");
 				}
-				if(tabMin.get(i)!= "my friend") {
+				if(tabMin.get(i)!= "my friend" && tabMin.get(i)!= "my friends") {
 					helloMin.append(tabMin.get(i).substring(0, 1).toUpperCase() + tabMin.get(i).substring(1)) ;
 				} else {
 					helloMin.append(tabMin.get(i));
@@ -124,14 +124,19 @@ public class Welcome {
 	 */
 	private static ArrayList<String> extractTabToMajTab(String[] tab) {
 		ArrayList<String> tabMaj = new ArrayList<String>();
+		ArrayList<Integer> tabMajOcc = new ArrayList<Integer>();
 		for(int i = 0;i < tab.length ;i++) {
-			if(tab[i].equals(tab[i].toUpperCase())){
-				if(!tab[i].trim().equals("")) {
-					tabMaj.add(tab[i].trim());
+			if(tab[i].equals(tab[i].toUpperCase()) && !tab[i].trim().equals("")) {
+				String nomFormate = tab[i].trim();
+				if(tabMaj.contains(nomFormate)) {
+					tabMajOcc.set(tabMaj.indexOf(nomFormate), tabMajOcc.get(tabMaj.indexOf(nomFormate))+1);
+				} else {
+					tabMaj.add(nomFormate);
+					tabMajOcc.add(1);
 				}
 			}
-
 		}
+		denombrementNom(tabMaj, tabMajOcc);
 		return tabMaj;
 	}
 
@@ -141,14 +146,39 @@ public class Welcome {
 	 */
 	private static ArrayList<String> extractTabToMinTAb(String[] tab) {
 		ArrayList<String> tabMin = new ArrayList<String>();
+		ArrayList<Integer> tabMinOcc = new ArrayList<Integer>();
 		for(int i = 0;i < tab.length ;i++) {
-			if(!tab[i].equals(tab[i].toUpperCase())){
-				tabMin.add(tab[i].trim());
+			if(tab[i].trim().equals("")) {
+				tab[i] = "my friend";
 			}
-			if(tab[i].trim().equals(""))
-				tabMin.add("my friend");
+			if(!tab[i].equals(tab[i].toUpperCase())){
+				String nomFormate = tab[i].trim().toLowerCase();
+				if(tabMin.contains(nomFormate)) {
+					tabMinOcc.set(tabMin.indexOf(nomFormate), tabMinOcc.get(tabMin.indexOf(nomFormate))+1);
+				} else{
+					tabMin.add(nomFormate);
+					tabMinOcc.add(1);
+				}
+			}
 		}
+		denombrementNom(tabMin, tabMinOcc);
 		return tabMin;
+	}
+
+	/**
+	 * @param tabMin
+	 * @param tabMinOcc
+	 */
+	private static void denombrementNom(ArrayList<String> tabMin, ArrayList<Integer> tabMinOcc) {
+		for(int i = 0; i < tabMin.size(); i++ ) {
+			if(tabMinOcc.get(i) > 1) {
+				if (tabMin.get(i).equals("my friend")){
+					tabMin.set(i, "my friends");
+				} else {
+					tabMin.set(i, tabMin.get(i) + " (x"+ tabMinOcc.get(i)+ ")");
+				}
+			}
+		}
 	}
 	
 }
