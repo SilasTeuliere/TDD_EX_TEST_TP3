@@ -44,4 +44,36 @@ class WelcomeTest {
 		assertEquals("Hello, Bob, Amy, Richard", str.conversation("bob,amy,richard"));
 		assertEquals("Hello, James, Patrick, Jerry", str.conversation("James,patrick,Jerry"));
 	}
+	
+	@Test
+	void respond_plusieur_noms_maj() {
+		assertEquals("Hello, Amy, Jerry. AND HELLO, BOB !", str.conversation("Amy,BOB,Jerry"));
+		assertEquals("HELLO, AMY, BOB, JERRY !", str.conversation("AMY,BOB,JERRY"));
+		assertEquals("Hello, Amy, Bob, Jerry", str.conversation("Amy,bob,jerry"));
+		assertEquals("Hello, Amy, Jerry. AND HELLO, BOB, TOTO !", str.conversation("Amy,BOB,jerry,TOTO"));
+	}
+	
+//	@Test
+//	void respond_plusieur_noms_and() {
+//		assertEquals("Hello, Bob, Amy and Jerry!", str.conversation("bob,amy,Jerry"));
+//		assertEquals("HELLO, AMY, BOB AND JERRY !", str.conversation("AMY,BOB,JERRY"));
+//		assertEquals("Hello, Bob and Jean. AND HELLO, AMY AND JERRY !", str.conversation("AMY,bob,JERRY,jean"));
+//	}
+	
+//	@Test
+//	void respond_plusieur_noms_vide() {
+//		assertEquals("Hello, Amy, Bob, Jerry", str.conversation("Amy    ,  bob,  jerry  "));
+//	}
+	
+//	@Test
+//	void respond_plusieur_noms_occurence() {
+//		assertEquals("Hello, Bob(x3), and Amy. AND HELLO JERRY (x2)", str.conversation("bob,JERRY, bob,amy,bob,JERRY"));
+//		assertEquals("Hello, Bob(x2), and Amy. AND HELLO JERRY (x2) AND BOB", str.conversation("bob,JERRY, BOB,amy,bob,JERRY"));
+//	}
+	
+//	@Test
+//	void respond_plusieur_noms_YODA() {
+//		assertEquals("Bob, Yoda, and Amy, Hello. AND HELLO JERRY", str.conversation(" bob, yoda, amy, JERRY,"));
+//		assertEquals("Hello, Bob and Amy. AND YODA (X2) AND JERRY HELLO !", str.conversation("bob, YODA, amy, JERRY, YODA"));
+//	}
 }
