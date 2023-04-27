@@ -71,9 +71,13 @@ class WelcomeTest {
 		assertEquals("Hello, Bob (x2) and Amy (x3)", Welcome.welcome("bob,amy, bob,amy,amy"));
 	}
 	
-//	@Test
-//	void respond_plusieur_noms_YODA() {
-//		assertEquals("Bob, Yoda, and Amy, Hello. AND HELLO, JERRY", Welcome.welcome(" bob, yoda, amy, JERRY,"));
-//		assertEquals("Hello, Bob and Amy. AND YODA (X2) AND JERRY HELLO !", Welcome.welcome("bob, YODA, amy, JERRY, YODA"));
-//	}
+	@Test
+	void respond_plusieur_noms_YODA() {
+		assertEquals("Bob, Yoda and Amy, Hello. AND HELLO, JERRY !", Welcome.welcome(" bob,yoda, amy, JERRY,"));
+		assertEquals("Hello, Bob and Amy. AND YODA (x2) AND JERRY, HELLO !", Welcome.welcome("bob, YODA, amy, JERRY, YODA"));
+		assertEquals("Bob, Amy and Yoda, Hello. AND YODA (x2) AND JERRY, HELLO !", Welcome.welcome("bob, YODA, amy, JERRY, YODA,yoda"));
+		assertEquals("Hello, Bob, Amy and Yod. AND YODA (x2) AND JERRY, HELLO !", Welcome.welcome("bob, YODA, amy, JERRY, YODA,yod"));
+		assertEquals("Bob, Amy, my friend and Yoda (x2), Hello. AND YODA AND JERRY, HELLO !", Welcome.welcome("bob, YODA, amy, JERRY, ,yoda,Yoda"));
+	}
+	
 }

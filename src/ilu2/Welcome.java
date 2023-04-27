@@ -40,15 +40,63 @@ public class Welcome {
 	 * @return
 	 */
 	private static String concatPlusieurNoms(final String[] tabNoms) {
-		StringBuilder helloMin = new StringBuilder("Hello, ");
-		StringBuilder helloMaj = new StringBuilder("HELLO, ");
+		StringBuilder helloMin = new StringBuilder();
+		StringBuilder helloMaj = new StringBuilder();
 		String strReturn = "";
 		ArrayList<String> tabMin = extractTabToMinTAb(tabNoms);
 		ArrayList<String> tabMaj = extractTabToMajTab(tabNoms);
-		prepHelloMaj(helloMaj, tabMaj);
-		prepHelloMin(helloMin, tabMin);
+		yodaMin(helloMin, tabMin);
+		yodaMaj(helloMaj, tabMaj);
 		strReturn = testToStrReturn(helloMin, helloMaj, tabMin, tabMaj);
 		return strReturn;
+	}
+
+	/**
+	 * @param helloMaj
+	 * @param tabMaj
+	 */
+	private static void yodaMaj(StringBuilder helloMaj, ArrayList<String> tabMaj) {
+		if(tabMaj.size()>0) {
+			for(int i = 0; i < tabMaj.size(); i++) {
+				String travail = tabMaj.get(i).trim();
+				int tailleTravail = tabMaj.get(i).length();
+				if((tailleTravail == 4 && travail.equals("YODA")) 
+						|| (tailleTravail > 8 && travail.substring(0, 7).equals("YODA (x") )) {
+					prepHelloMaj(helloMaj, tabMaj);
+					helloMaj.append(", HELLO");
+					i = tabMaj.size();
+				}
+				else if(i == tabMaj.size()-1) {
+					helloMaj.append("HELLO, ");
+					prepHelloMaj(helloMaj, tabMaj);
+					i = tabMaj.size();
+				}
+			}
+		}
+	}
+
+	/**
+	 * @param helloMin
+	 * @param tabMin
+	 */
+	private static void yodaMin(StringBuilder helloMin, ArrayList<String> tabMin) {
+		if(tabMin.size()>0) {
+			for(int i = 0; i < tabMin.size(); i++) {
+				String travail = tabMin.get(i).trim().toLowerCase();
+				int tailleTravail = tabMin.get(i).length();
+				if((tailleTravail == 4 && travail.equals("yoda")) 
+						|| (tailleTravail > 8 && travail.substring(0, 7).equals("yoda (x") )) {
+					prepHelloMin(helloMin, tabMin);
+					helloMin.append(", Hello");
+					i = tabMin.size();
+				}
+				else if(i == tabMin.size()-1) {
+					helloMin.append("Hello, ");
+					prepHelloMin(helloMin, tabMin);
+					i = tabMin.size();
+				}
+			}
+		}
 	}
 
 	/**
@@ -82,19 +130,17 @@ public class Welcome {
 	 * @param tabMin
 	 */
 	private static void prepHelloMin(StringBuilder helloMin, ArrayList<String> tabMin) {
-		if(tabMin.size() > 0) {
-			for (int i = 0; i < tabMin.size(); i++) {
-				if(i == tabMin.size() - 1 && tabMin.size() != 1) {
-					helloMin.append(" and ");
-				}
-				if(tabMin.get(i)!= "my friend" && tabMin.get(i)!= "my friends") {
-					helloMin.append(tabMin.get(i).substring(0, 1).toUpperCase() + tabMin.get(i).substring(1)) ;
-				} else {
-					helloMin.append(tabMin.get(i));
-				}
-				if(i < tabMin.size() - 2) {
-					helloMin.append(", ");
-				}
+		for (int i = 0; i < tabMin.size(); i++) {
+			if(i == tabMin.size() - 1 && tabMin.size() != 1) {
+				helloMin.append(" and ");
+			}
+			if(tabMin.get(i)!= "my friend" && tabMin.get(i)!= "my friends") {
+				helloMin.append(tabMin.get(i).substring(0, 1).toUpperCase() + tabMin.get(i).substring(1)) ;
+			} else {
+				helloMin.append(tabMin.get(i));
+			}
+			if(i < tabMin.size() - 2) {
+				helloMin.append(", ");
 			}
 		}
 	}
@@ -104,15 +150,13 @@ public class Welcome {
 	 * @param tabMaj
 	 */
 	private static void prepHelloMaj(StringBuilder helloMaj, ArrayList<String> tabMaj) {
-		if(tabMaj.size() > 0) {
-			for (int i = 0; i < tabMaj.size(); i++) {
-				if(i == tabMaj.size() - 1 && tabMaj.size() != 1) {
-					helloMaj.append(" AND ");
-				}
-				helloMaj.append(tabMaj.get(i));
-				if(i < tabMaj.size() - 2) {
-					helloMaj.append(", ");
-				}
+		for (int i = 0; i < tabMaj.size(); i++) {
+			if(i == tabMaj.size() - 1 && tabMaj.size() != 1) {
+				helloMaj.append(" AND ");
+			}
+			helloMaj.append(tabMaj.get(i));
+			if(i < tabMaj.size() - 2) {
+				helloMaj.append(", ");
 			}
 		}
 	}
@@ -169,13 +213,13 @@ public class Welcome {
 	 * @param tabMin
 	 * @param tabMinOcc
 	 */
-	private static void denombrementNom(ArrayList<String> tabMin, ArrayList<Integer> tabMinOcc) {
-		for(int i = 0; i < tabMin.size(); i++ ) {
-			if(tabMinOcc.get(i) > 1) {
-				if (tabMin.get(i).equals("my friend")){
-					tabMin.set(i, "my friends");
+	private static void denombrementNom(ArrayList<String> tab, ArrayList<Integer> tabOcc) {
+		for(int i = 0; i < tab.size(); i++ ) {
+			if(tabOcc.get(i) > 1) {
+				if (tab.get(i).equals("my friend")){
+					tab.set(i, "my friends");
 				} else {
-					tabMin.set(i, tabMin.get(i) + " (x"+ tabMinOcc.get(i)+ ")");
+					tab.set(i, tab.get(i) + " (x"+ tabOcc.get(i)+ ")");
 				}
 			}
 		}
